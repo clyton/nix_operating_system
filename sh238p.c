@@ -90,12 +90,15 @@ runcmd(struct cmd *cmd)
       close(fd[WRITE_END]);
       runcmd(pcmd->left);
     }
+    wait(NULL);
     if (fork() == 0) {
       dup2(fd[READ_END], STDIN_FILENO);
       close(fd[READ_END]);
       close(fd[WRITE_END]);
       runcmd(pcmd->right);
     }
+    close(fd[READ_END]);
+    close(fd[WRITE_END]);
     wait(NULL);
     break;
   }    

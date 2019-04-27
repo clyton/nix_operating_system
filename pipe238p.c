@@ -57,6 +57,10 @@ main(int argc, char* argv[])
     execvp(arg[2][0], arg[2]);
     
   }
+  close(fd[READ_END]);
+  close(fd[WRITE_END]);
+  close(fd2[READ_END]);
+  close(fd2[WRITE_END]);
   wait(NULL);
 
  }
